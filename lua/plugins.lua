@@ -70,17 +70,32 @@ local packer = require('packer').startup(function(use)
     -- nvim-comment
     use 'terrortylor/nvim-comment'
 
+    -- vim-startuptime
+    use {
+        'dstein64/vim-startuptime',
+        opt = true,
+        cmd = "StartupTime",
+    }
+
+    --#region git-integrated
+
     -- vim-fugitive(git operation)
     use 'tpope/vim-fugitive'
 
     -- gitsigns(git status)
     use 'lewis6991/gitsigns.nvim'
 
+    --#endregion
+
+    --#region colorscheme
+
     -- colorscheme gruvbox
     use 'ellisonleao/gruvbox.nvim'
 
     -- colorscheme tokyonight
     use 'folke/tokyonight.nvim'
+
+    --#endregion
 
 end)
 
