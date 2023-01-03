@@ -34,7 +34,9 @@ local my_env = require('environment')
 require('plugins')
 require('autocmd')
 require('clipboard')
-require('keymap')
+
+local my_keymap = require('keymap')
+my_keymap.setup()
 
 --#region colorscheme
 vim.o.background = "dark"
