@@ -4,12 +4,16 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
+local my_config = require('config')
+local my_env = require('environment')
+local my_keymap = require('keymap')
+
 local prev_packpath = ',$HOME/.vim'
 
 opt.runtimepath = opt.runtimepath + prev_packpath
 opt.packpath = opt.packpath + prev_packpath
 
-g.python3_host_prog = "$HOME/miniconda3/bin/python"
+g.python3_host_prog = my_config.python_executable
 g.loaded_perl_provider = 0
 
 -- show line number
@@ -28,14 +32,10 @@ opt.shiftwidth = 4
 -- no wrapping
 vim.wo.wrap = false
 
-local my_env = require('environment')
-
 -- plugins.lua require all config lua files for plugins
 require('plugins')
 require('autocmd')
 require('clipboard')
-
-local my_keymap = require('keymap')
 my_keymap.setup()
 
 --#region colorscheme
