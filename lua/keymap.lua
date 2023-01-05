@@ -16,11 +16,14 @@ M.setup = function()
 
     -- region telescope
     local builtin = require('telescope.builtin')
+    local frecency = require('telescope').extensions.frecency
     -- vim.keymap.set('n', '<leader>te', ':Telescope<CR>', opts)
     vim.keymap.set('n', '<space>te', builtin.builtin, opts)
     vim.keymap.set('n', '<space>ff', builtin.find_files, opts)
     vim.keymap.set('n', '<space>of', builtin.oldfiles, opts)
     vim.keymap.set('n', '<space>lg', builtin.live_grep, opts)
+    -- 'frecency' is better than 'oldfiles'
+    vim.keymap.set('n', '<space>rf', frecency.frecency, opts)
 
     -- clipboard keymap
     -- use unnamed clipboard('+' register)

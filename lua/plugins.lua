@@ -22,11 +22,23 @@ local packer = require('packer').startup(function(use)
         tag = 'nightly', --optional, updated every week
     }
 
+    -- telescope
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = {
             'nvim-lua/plenary.nvim',
         },
+    }
+
+    -- telescope-frecency
+    use {
+        'nvim-telescope/telescope-frecency.nvim',
+        requires = {
+            'kkharji/sqlite.lua',
+        },
+        config = function ()
+            require('telescope').load_extension('frecency')
+        end,
     }
 
     -- [LSP] mason: LSP servers, DAP servers, linters and formatters manager
