@@ -1,12 +1,13 @@
 -- print("init.lua is loaded!")
 local cmd = vim.cmd
-local fn = vim.fn
+-- local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
 local my_config = require('config')
 local my_env = require('environment')
 local my_keymap = require('keymap')
+_G.runtime = require('core.runtime')
 
 local prev_packpath = ',$HOME/.vim'
 
@@ -39,15 +40,17 @@ require('clipboard')
 my_keymap.setup()
 
 --#region colorscheme
-vim.o.background = "dark"
-if not my_env.isUsingTmux then
-    -- print('not using tmux, guicolors = true')
-    vim.opt.termguicolors = true
-    cmd 'colorscheme tokyonight-storm'
-else
-    cmd 'colorscheme gruvbox'
+-- [fix] setting colorscheme during reload causing a nil index
+if not runtime.is_reloading then
+    vim.o.background = "dark"
+    if not my_env.isUsingTmux then
+        -- print('not using tmux, guicolors = true')
+        vim.opt.termguicolors = true
+        cmd 'colorscheme tokyonight-storm'
+    else
+        cmd 'colorscheme gruvbox'
+    end
 end
-
 -- cmd 'colorscheme gruvbox'
 -- cmd 'colorscheme tokyonight-storm'
 --#endregion

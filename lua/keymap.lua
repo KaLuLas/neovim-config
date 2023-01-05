@@ -30,6 +30,9 @@ M.setup = function()
     vim.keymap.set('v', '<C-c>', '"+y', opts) -- visual mode: copy selection
     vim.keymap.set('n', '<C-c>', '"+yy', opts) -- normal mode: copy line
     vim.keymap.set('n', '<C-v>', '"+p', opts) -- normal mode: paste
+
+    -- runtime keymap
+    vim.keymap.set('n', '<A-r>', runtime.reload, { noremap = true, silent = false }) -- you dont want a 'silent' for this
 end
 
 -- Execute key-mapping for lsp on_attach
@@ -46,8 +49,8 @@ M.execute_lsp_attach_mapping = function(bufopts)
     end, bufopts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<M-CR>', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', '<M-F7>', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<A-CR>', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<A-F7>', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
