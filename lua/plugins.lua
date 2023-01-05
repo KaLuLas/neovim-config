@@ -77,6 +77,7 @@ local packer = require('packer').startup(function(use)
         cmd = "StartupTime",
     }
 
+    use 'akinsho/toggleterm.nvim'
     --#region git-integrated
 
     -- vim-fugitive(git operation)
@@ -106,6 +107,7 @@ require('plugin/nvim_tree')
 require('plugin/telescope')
 require('plugin/alpha')
 require('plugin/gitsigns')
+require('plugin/toggleterm')
 
 -- set up servers via lspconfig
 require('plugin/lspconfig')

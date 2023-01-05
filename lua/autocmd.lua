@@ -16,4 +16,11 @@ vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEn
     -- vim.opt.foldenable     = false
   end
 })
+
+vim.api.nvim_create_autocmd({'TermOpen'}, {
+    pattern = 'term://*toggleterm#*',
+    callback = function ()
+        require('keymap').execute_terminal_mapping()
+    end
+})
 ---ENDWORKAROUND

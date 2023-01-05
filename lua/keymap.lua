@@ -1,9 +1,9 @@
 -- lsp related
-local t = {}
+local M = {}
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-t.setup = function()
+M.setup = function()
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -30,7 +30,7 @@ t.setup = function()
 end
 
 -- Execute key-mapping for lsp on_attach
-t.execute_lsp_attach_mapping = function(bufopts)
+M.execute_lsp_attach_mapping = function(bufopts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<C-b>', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -48,8 +48,18 @@ t.execute_lsp_attach_mapping = function(bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
+M.execute_terminal_mapping = function()
+    local opts = { noremap = true, buffer = 0 }
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
 -- Return mapping table for nvim_cmp
-t.create_nvim_cmp_mapping = function()
+M.create_nvim_cmp_mapping = function()
     local luasnip = require('luasnip')
     local cmp = require('cmp')
     return {
@@ -81,4 +91,4 @@ t.create_nvim_cmp_mapping = function()
     }
 end
 
-return t
+return M
