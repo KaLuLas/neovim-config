@@ -7,7 +7,7 @@ local default_on_attach = function(client, bufnr)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    require('keymap').execute_lsp_attach_mapping(bufopts)
+    keymap.execute_lsp_attach_mapping(bufopts)
 end
 
 -- Add additional capabilities supported by nvim-cmp

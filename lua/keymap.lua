@@ -11,8 +11,14 @@ M.setup = function()
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
     -- region nvim_tree
-    vim.keymap.set('n', '<F5>', ':NvimTreeToggle<CR>', opts)
-    vim.keymap.set('n', '<F6>', ':NvimTreeFocus<CR>', opts)
+    local nvim_tree = require("nvim-tree")
+    -- nvim_tree.
+    vim.keymap.set('n', '<A-0>', function()
+        local main_win_num = 1000
+        vim.api.nvim_set_current_win(main_win_num)
+    end, opts)
+
+    vim.keymap.set('n', '<A-1>', nvim_tree.focus, opts)
 
     -- region telescope
     local builtin = require('telescope.builtin')
@@ -94,6 +100,15 @@ M.create_nvim_cmp_mapping = function()
                 fallback()
             end
         end, { 'i', 's' }),
+    }
+end
+
+-- Return mapping table for nvim_comment
+M.create_comment_mapping = function()
+    return {
+        line_mapping = "<C-_>",
+        -- operator_mapping = "<C-_>",
+        comment_chunk_text_object = "<C-A-_>",
     }
 end
 

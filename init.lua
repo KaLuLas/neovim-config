@@ -6,7 +6,7 @@ local opt = vim.opt
 
 local my_config = require('config')
 local my_env = require('environment')
-local my_keymap = require('keymap')
+_G.keymap = require('keymap')
 _G.runtime = require('core.runtime')
 
 local prev_packpath = ',$HOME/.vim'
@@ -37,7 +37,7 @@ vim.wo.wrap = false
 require('plugins')
 require('autocmd')
 require('clipboard')
-my_keymap.setup()
+keymap.setup()
 
 --#region colorscheme
 -- [fix] setting colorscheme during reload causing a nil index
