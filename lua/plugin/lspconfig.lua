@@ -20,6 +20,7 @@ local easy_lsp_list = {
     'marksman',
     'tsserver',
     'volar',
+    'omnisharp',
 }
 
 for _, lsp in ipairs(easy_lsp_list) do
