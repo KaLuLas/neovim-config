@@ -3,6 +3,6 @@ local env = vim.env
 local my_env = {}
 
 -- true if current using tmux
-my_env.isUsingTmux = env.TMUX ~= nil
+my_env.is_using_tmux = env.TMUX ~= nil
 
 return my_env
