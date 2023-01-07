@@ -1,18 +1,4 @@
--- quick mason setup
-require('mason').setup()
-require('mason-lspconfig').setup()
-
-local lspconfig = require('lspconfig')
-local lsp_utils = require('plugin.lsp.utils')
-local default_lsp_capabilities = lsp_utils.default_capabilities
-local default_lsp_on_attach = lsp_utils.default_on_attach
-local default_lsp_flags = lsp_utils.default_flags
-
--- sumneko_lua setup
-lspconfig.sumneko_lua.setup(require('plugin.lsp.sumneko_lua').get_config(default_lsp_capabilities, default_lsp_on_attach
-    , default_lsp_flags))
-
-local easy_lsp_list = {
+local ensure_installed_lsp_list = {
     'pyright',
     'bashls',
     'clangd',
@@ -21,11 +7,37 @@ local easy_lsp_list = {
     'tsserver',
     'volar',
     'omnisharp',
+    'sumneko_lua',
 }
 
-for _, lsp in ipairs(easy_lsp_list) do
-    lspconfig[lsp].setup(lsp_utils.default_setup)
-end
+-- quick mason setup
+require('mason').setup()
+local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require('lspconfig')
+local lsp_utils = require('plugin.lsp.utils')
+
+mason_lspconfig.setup({
+    ensure_installed = ensure_installed_lsp_list,
+})
+
+mason_lspconfig.setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function(server_name) -- default handler (optional)
+        -- print(string.format("server %s setup with default_handler", server_name))
+        lspconfig[server_name].setup(lsp_utils.default_setup)
+    end,
+    -- Next, you can provide a dedicated handler for specific servers.
+    -- For example, a handler override for the `rust_analyzer`:
+    ["sumneko_lua"] = function()
+        -- print("sumneko_lua setup with dedicated handler")
+        -- sumneko_lua setup
+        local sumneko_settings = { settings = require('plugin.lsp.sumneko_lua').get_setting() }
+        local sumneko_lua_setup = vim.tbl_deep_extend("force", lsp_utils.default_setup, sumneko_settings)
+        lspconfig["sumneko_lua"].setup(sumneko_lua_setup)
+    end
+}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
