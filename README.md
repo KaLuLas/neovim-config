@@ -116,7 +116,7 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 同时也要设置terminal颜色保证正常显示，举例mobaxterm：
 
-![mobaxterm-font-setting](./assets/mobaxterm-font-setting.png)
+![mobaxterm-font-setting](https://cdn.jsdelivr.net/gh/kalulas/image-hosting/images/mobaxterm-font-setting.png)
 
 ## Font / Color
 
@@ -130,7 +130,7 @@ windows操作系统下显示，好像需要windows compatible也装上才能在m
 
 https://www.nerdfonts.com/font-downloads
 
-![mobaxterm-color-setting](./assets/mobaxterm-color-setting.png)
+![mobaxterm-color-setting](https://cdn.jsdelivr.net/gh/kalulas/image-hosting/images/mobaxterm-color-setting.png)
 
 ## Plugin installed path
 
